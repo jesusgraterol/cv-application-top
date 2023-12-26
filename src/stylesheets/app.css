@@ -231,8 +231,8 @@ main .btn, main .icon-btn {
  * ABOUT *
  ******* */
 #about {
-  margin: 20px 0 0 0;
-  padding: 15px;
+  margin: 15px 0 0 0;
+  padding: 10px 15px;
 }
 #about > header {
   display: flex;
@@ -248,7 +248,7 @@ main .btn, main .icon-btn {
  * EXPERIENCE *
  ************ */
 #experience {
-  padding: 15px;
+  padding: 10px 15px;
 }
 #experience > header {
   display: flex;
@@ -263,7 +263,7 @@ main .btn, main .icon-btn {
  * EDUCATION *
  *********** */
 #education {
-  padding: 15px;
+  padding: 10px 15px;
 }
 #education > header {
   display: flex;
