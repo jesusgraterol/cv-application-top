@@ -169,6 +169,9 @@ main .btn, main .icon-btn {
 }
 
 
+
+
+
 /* ********
  * HEADER *
  ******** */
@@ -301,6 +304,23 @@ main .btn, main .icon-btn {
 * SCREEN: B/w 1025px to 1280px
 */
 @media (min-width: 1025px) and (max-width: 1280px) {
+  /* ***************
+   * APP CONTAINER *
+   *************** */
+  #appContainer > .separator {
+    flex: 0.2;
+  }
+
+
+
+
+  
+  /* ****************
+  * MAIN CONTAINER *
+  **************** */
+  main {
+    flex: 1;
+  }
 
 }
 
@@ -313,6 +333,23 @@ main .btn, main .icon-btn {
 * SCREEN: B/w 768px to 1024px
 */
 @media (min-width: 768px) and (max-width: 1024px) {
+  /* ***************
+   * APP CONTAINER *
+   *************** */
+  #appContainer > .separator {
+    flex: 0.1;
+  }
+
+
+
+
+  
+  /* ****************
+  * MAIN CONTAINER *
+  **************** */
+  main {
+    flex: 1;
+  }
 
 }
 
@@ -324,6 +361,27 @@ main .btn, main .icon-btn {
 * SCREEN: B/w 481px to 767px
 */
 @media (min-width: 481px) and (max-width: 767px) {
+  /* ***************
+   * APP CONTAINER *
+   *************** */
+  #appContainer > .separator {
+    flex: 0.05;
+  }
+
+
+
+
+  
+  /* ****************
+  * MAIN CONTAINER *
+  **************** */
+  main {
+    flex: 1;
+  }
+
+
+
+
 
 }
 
@@ -336,5 +394,57 @@ main .btn, main .icon-btn {
 * SCREEN: 480px to lower resolution mobiles
 */
 @media (max-width: 480px) {
+  /* ***************
+  * APP CONTAINER *
+  *************** */
+  #appContainer {
+    flex-direction: column;
+  }
+
+
+
+
+
+  /* ****************
+   * MAIN CONTAINER *
+   **************** */
+  main {
+    margin: 0;
+  }
+
+
+
+
+
+  /* ********
+   * HEADER *
+   ******** */
+  #header {
+    padding:10px 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #header .avatar {
+    align-self: center;
+    margin-bottom: 0;
+  }
+  #header article h1 {
+    text-align: center;
+  }
+  #header article .headline {
+    text-align: center;
+  }
+  #header article ul {
+    margin-top: 20px;
+  }
+  #header article .icon-btn {
+    position:fixed;
+    top:15px;
+    right:15px;
+    color:#FFFFFF;
+  }
+
+
 
 }

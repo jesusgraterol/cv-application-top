@@ -30,12 +30,12 @@ function Header() {
             <span className="md-icon">location_on</span> Albuquerque, New Mexico, U.S.
           </li>
         </ul>
-      {
-        sectionHovered &&
-        <button className="icon-btn raised" aria-label="Edit Personal Information">
-          <span className="md-icon" aria-hidden="true">edit</span>
-        </button>
-      }
+        {
+          sectionHovered &&
+          <button className="icon-btn raised" aria-label="Edit Personal Information">
+            <span className="md-icon" aria-hidden="true">edit</span>
+          </button>
+        }
       </article>
     </header>
   );
