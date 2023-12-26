@@ -32,20 +32,19 @@
  * GLOBALS  *
  ********** */
 :root {
-  --primary-color: #195458;
-  --primary-contrast-color: #0d2c2e;
-  --accent-color: #f28c17;
-  --accent-contrast-color: #b6680f;
+  --primary-color: #0f766e;
+  --primary-contrast-color: #134e4a;
+  --accent-color: #14b8a6;
+  --accent-contrast-color: #0f766e;
 
   --success-color: #0f766e;
-  --error-color: #B71C1C;
+  --error-color: #991b1b;
 
   --text-color: #1f1d1d;
   --light-text-color: #696161;
 
   --app-background-color: #f7f1f1;
   --app-background-contrast-color: #e7e0e0;
-  /* --app-background-contrast-color: #ddd1d1; */
 
   --font-size: 16px;
   font-size: var(--font-size);
@@ -103,6 +102,17 @@ strong {
 
 
 
+/* ***********
+ * SEPARATOR *
+ *********** */
+.separator {
+  flex:1;
+}
+
+
+
+
+
 /* ****************
  * ROOT CONTAINER *
  **************** */
@@ -131,8 +141,12 @@ body {
   width:100%;
   overflow-x: hidden;
   animation: fadein 0.5s ease-in;
+  display: flex;
+  flex-direction: row;
 }
-
+#appContainer > .separator {
+  flex: 0.4;
+}
 
 
 
@@ -142,12 +156,117 @@ body {
  * MAIN CONTAINER *
  **************** */
 main {
+  flex: 0.6;
+  margin: 15px 0;
+  background-color: white;
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.20);
+}
 
+
+/* Button animations used on mouse enter and leave events */
+main .btn, main .icon-btn {
+  animation: fadein 0.3s ease-in;
+}
+
+
+/* ********
+ * HEADER *
+ ******** */
+#header {
+  padding:10px 15px;
+  background-color: var(--primary-color);
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,0.14), 0 3px 3px -2px rgba(0,0,0,0.12), 0 1px 8px 0 rgba(0,0,0,0.20);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+#header .avatar {
+  max-width: 120px;
+  border-radius: 50%;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+  align-self: flex-end;
+  margin-bottom: -35px;
+}
+
+#header article {
+  color: #FFFFFF;
+  position: relative;
+}
+#header article h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom:0;
+}
+#header article .headline {
+  font-size: 1rem;
+  margin:0;
+}
+
+#header article ul li {
+  font-size: 0.9rem;
+}
+#header article ul li .md-icon {
+  vertical-align: middle;
+}
+
+#header article .icon-btn {
+  position:absolute;
+  top:5px;
+  right:5px;
+  color:#FFFFFF;
+}
+#header article .icon-btn:hover,
+#header article .icon-btn:focus {
+  background-color: inherit;
+  opacity: 0.6;
+}
+
+
+
+/* *******
+ * ABOUT *
+ ******* */
+#about {
+  margin: 20px 0 0 0;
+  padding: 15px;
+}
+#about > header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 
 
 
+
+/* ************
+ * EXPERIENCE *
+ ************ */
+#experience {
+  padding: 15px;
+}
+#experience > header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+
+
+/* ***********
+ * EDUCATION *
+ *********** */
+#education {
+  padding: 15px;
+}
+#education > header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 
 
 
