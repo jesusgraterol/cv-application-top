@@ -11,7 +11,7 @@ function Header() {
             onMouseEnter={() => setSectionHovered(true)} 
             onMouseLeave={() => setSectionHovered(false)}>
       
-      <img className="avatar" src="default-avatar.png" alt="Photograph of a woman"/>
+      <img src="default-avatar.png" alt="Photograph of the CV's owner"/>
       
       <span className="separator"></span>
 

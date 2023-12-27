@@ -184,11 +184,11 @@ main .btn, main .icon-btn {
   justify-content: flex-start;
   align-items: flex-start;
 }
-#header .avatar {
+#header img {
+  align-self: flex-end;
   max-width: 120px;
   border-radius: 50%;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
-  align-self: flex-end;
   margin-bottom: -35px;
 }
 
@@ -227,6 +227,8 @@ main .btn, main .icon-btn {
 
 
 
+
+
 /* *******
  * ABOUT *
  ******* */
@@ -256,6 +258,39 @@ main .btn, main .icon-btn {
   align-items: center;
 }
 
+#experience article {
+  margin: 20px 0;
+}
+#experience article:first-of-type {
+  margin-top: 0;
+}
+#experience article:last-of-type {
+  margin-bottom: 0;
+}
+
+#experience article p {
+  margin: 0;
+}
+#experience article .title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#experience article .company {
+  font-size: 1rem;
+}
+#experience article .date-range {
+  font-size: 0.8rem;
+  color: var(--light-text-color);
+}
+#experience article ul li {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+#experience article .icon-btn {
+  float: right;
+}
+
 
 
 
@@ -271,6 +306,35 @@ main .btn, main .icon-btn {
   align-items: center;
 }
 
+
+#education article {
+  margin: 20px 0;
+}
+#education article:first-of-type {
+  margin-top: 0;
+}
+#education article:last-of-type {
+  margin-bottom: 0;
+}
+
+#education article p {
+  margin: 0;
+}
+#education article .title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#education article .issuer {
+  font-size: 1rem;
+}
+#education article .date-range {
+  font-size: 0.8rem;
+  color: var(--light-text-color);
+}
+
+#education article .icon-btn {
+  float: right;
+}
 
 
 
@@ -425,7 +489,7 @@ main .btn, main .icon-btn {
     justify-content: center;
     align-items: center;
   }
-  #header .avatar {
+  #header img {
     align-self: center;
     margin-bottom: 0;
   }

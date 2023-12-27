@@ -11,6 +11,7 @@ The key features are:
 - Personal Biography
 - Professional Experience History
 - Education History
+- Cross-Platform Compatibility
 
 
 
@@ -142,4 +143,5 @@ N/A
 - [Babel](https://babeljs.io/)
 - [Vite](https://vitejs.dev/)
 - [React](https://react.dev/)
+- [prop-types](https://github.com/facebook/prop-types)
 - [Unsplash](https://unsplash.com/photos/woman-in-white-crew-neck-shirt-smiling-IF9TK5Uy-KI)
