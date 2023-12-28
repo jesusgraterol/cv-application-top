@@ -12,7 +12,7 @@ import { format } from 'date-fns';
 class Utilities {
   // the list of months
   static monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
-  'September', 'October', 'November', 'December' ];
+    'September', 'October', 'November', 'December' ];
 
 
 

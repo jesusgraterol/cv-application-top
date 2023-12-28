@@ -1,3 +1,5 @@
+import Utilities from '../utilities/utilities';
+
 /**
  * Database
  * Exposes the local storage API so the data managed in the app can persist.
@@ -20,12 +22,8 @@ class Database {
    * default.
    */
   static get() {
-    try {
-      return JSON.parse(localStorage.getItem(Database.#tableName));
-    } catch (e) {
-      console.error(e);
-      return Database.#buildDefaultRecord();
-    }
+    const record = localStorage.getItem(Database.#tableName);
+    return record ? JSON.parse(record) : Database.#buildDefaultRecord();
   }
 
   /**
@@ -39,12 +37,13 @@ class Database {
         name: 'Jane Doe',
         headline: 'Front-End Engineer',
         email: 'janedoe@gmail.com',
-        phoneNumber: '+1 320 455 8881',
+        phoneNumber: '+13204558881',
         location: 'Albuquerque, New Mexico, U.S.'
       },
       bio: 'I\'m a passionate front-end developer with a knack for bringing beautiful and functional web experiences to life. Combining my technical expertise with an eye for design, I weave code into interactive tapestries that captivate users and drive results.',
       experience: [
         {
+          id: Utilities.generateUUID(),
           title: 'Front-End Engineer',
           employeer: 'Google',
           start: { month: 7, year: 2022 },
@@ -54,6 +53,7 @@ class Database {
       ],
       education: [
         {
+          id: Utilities.generateUUID(),
           title: 'Computer Science and Engineering',
           issuer: 'Massachusetts Institute of Technology',
           start: { month: 1, year: 2020 },

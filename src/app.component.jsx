@@ -15,7 +15,7 @@ function App() {
 
       <main>
 
-        <Header/>
+        <Header record={record} dispatch={dispatch} />
 
         <About record={record} dispatch={dispatch} />
 

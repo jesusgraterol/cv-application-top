@@ -5,13 +5,12 @@
 .form .form-row {
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
 }
 
 
 /* Form Control */
 .form .form-row .form-control {
-    padding: 15px 5px 15px 5px;
+    padding: 5px 0;
     flex: 1;
 }
 .form .form-row .form-control input,
@@ -21,7 +20,6 @@
     background-color: inherit;
     border-bottom: 1px solid var(--primary-color);
     padding:7px;
-    margin-top: 10px;
 }
 
 .form .form-row .form-control textarea {

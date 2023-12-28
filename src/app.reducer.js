@@ -6,6 +6,16 @@
 function appReducer(record, action) {
   switch (action.type) {
     /**
+     * Header Actions
+     */
+    case 'update_general': {
+      return {
+        ...record,
+        general: action.newGeneral
+      }
+    }
+
+    /**
      * About Actions
      */
     case 'update_bio': {
