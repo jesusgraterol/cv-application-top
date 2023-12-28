@@ -340,6 +340,11 @@ main .btn, main .icon-btn {
 }
 
 
+/* Certificate form dialog */
+#certificateForm input[type="number"] {
+  margin-top:-4px;
+}
+
 
 
 

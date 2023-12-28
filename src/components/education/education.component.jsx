@@ -12,10 +12,14 @@ function Education({ record, dispatch }) {
   const [modal, setModal] = useState(false);
   const editItemID = useRef(null);
 
+  const addItem = () => {
+    editItemID.current = null;
+    setModal(true);
+  }
+
   const editItem = (itemID) => {
     editItemID.current = itemID;
     setModal(true);
-    editItemID.current = null;
   }
 
   return (
@@ -30,7 +34,9 @@ function Education({ record, dispatch }) {
           <span className="separator"></span>
           {
             sectionHovered &&
-            <button className="icon-btn primary raised" aria-label="Add Education Item">
+            <button className="icon-btn primary raised" 
+                    aria-label="Add Education Item" 
+                    onClick={addItem}>
               <span className="md-icon" aria-hidden="true">add</span>
             </button>
           }
@@ -42,11 +48,15 @@ function Education({ record, dispatch }) {
 
       </section>
     
-      <CertificateForm  modal={modal} 
-                        setModal={setModal} 
-                        record={record} 
-                        dispatch={dispatch}
-                        itemID={editItemID.current} />
+      {
+        modal &&
+        <CertificateForm  
+          modal={modal} 
+          setModal={setModal} 
+          record={record} 
+          dispatch={dispatch}
+          itemID={editItemID.current} />
+      }
 
     </>
 

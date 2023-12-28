@@ -37,8 +37,11 @@ function About({ record, dispatch }) {
 
       </section>
 
-      <AboutForm modal={modal} setModal={setModal} record={record} dispatch={dispatch} />
-
+      {
+        modal &&
+        <AboutForm modal={modal} setModal={setModal} record={record} dispatch={dispatch} />
+      }
+      
     </>
   );
 }

@@ -47,7 +47,11 @@ function Header({ record, dispatch }) {
 
       </header>
 
-      <HeaderForm modal={modal} setModal={setModal} record={record} dispatch={dispatch} />
+      {
+        modal && 
+        <HeaderForm modal={modal} setModal={setModal} record={record} dispatch={dispatch} />
+      }
+      
     
     </>
 
