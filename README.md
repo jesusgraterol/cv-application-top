@@ -12,6 +12,7 @@ The key features are:
 - Professional Experience History
 - Education History
 - Cross-Platform Compatibility
+- Data Persistence through LocalStorage 
 
 
 
