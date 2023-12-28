@@ -17,15 +17,8 @@ function Modal({ openModal, closeModal, children }) {
   }, [openModal]);
 
   return (
-    <dialog
-      ref={ref}
-      onCancel={closeModal}
-      onClose={closeModal}
-    >
+    <dialog ref={ref} onCancel={closeModal} onClose={closeModal}>
       {children}
-      <button onClick={closeModal}>
-        Close
-      </button>
     </dialog>
   );
 }

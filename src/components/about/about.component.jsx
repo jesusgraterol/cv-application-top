@@ -1,36 +1,52 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+import AboutForm from './about-form.component';
 
 /**
  * About Component
  * ...
  */
-function About() {
+function About({ record, dispatch }) {
   const [ sectionHovered, setSectionHovered ] = useState(false);
-  return (
-    <section  id="about" 
-              onMouseEnter={() => setSectionHovered(true)} 
-              onMouseLeave={() => setSectionHovered(false)}>
-      <header>
-        <h2>About</h2>
-        <span className="separator"></span>
-        {
-        sectionHovered && 
-          <button className="icon-btn primary raised" aria-label="Edit the About Section">
-            <span className="md-icon" aria-hidden="true">edit</span>
-          </button>
-        }
+  const [modal, setModal] = useState(false);
 
-      </header>
-      <article>
-        <p>
-          I&apos;m a passionate front-end developer with a knack for bringing beautiful and functional 
-          web experiences to life. Combining my technical expertise with an eye for design, I weave code 
-          into interactive tapestries that captivate users and drive results.
-        </p>
-      </article>
-    </section>
+  return (
+    <>
+
+      <section  id="about" 
+                onMouseEnter={() => setSectionHovered(true)} 
+                onMouseLeave={() => setSectionHovered(false)}>
+
+        <header>
+          <h2>About</h2>
+          <span className="separator"></span>
+          {
+          sectionHovered && 
+            <button className="icon-btn primary raised" 
+                    aria-label="Edit the About Section" 
+                    onClick={() => setModal(true)}>
+              <span className="md-icon" aria-hidden="true">edit</span>
+            </button>
+          }
+
+        </header>
+
+        <article>
+          <p>{record.bio}</p>
+        </article>
+
+      </section>
+
+      <AboutForm modal={modal} setModal={setModal} record={record} dispatch={dispatch} />
+
+    </>
   );
 }
+About.propTypes = {
+  record: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
+
 
 
 

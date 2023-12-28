@@ -23,6 +23,9 @@
 /* Anchors */
 @import url('modules/anchors.css');
 
+/* Form */
+@import url('modules/form.css');
+
 /* Dialog */
 @import url('modules/dialog.css');
 
