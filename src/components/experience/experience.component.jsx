@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Position from './position.component';
 
 /**
  * Experience Component
  * ...
  */
-function Experience() {
+function Experience({ record, dispatch }) {
   const [ sectionHovered, setSectionHovered ] = useState(false);
   return (
     <section  id="experience"
@@ -30,6 +31,10 @@ function Experience() {
 
     </section>
   );
+}
+Experience.propTypes = {
+  record: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 

@@ -75,7 +75,19 @@ class Utilities {
    * @returns string
    */
   static #prettifyDateRangeChunk(dateObj) {
-    return dateObj ? format(new Date(dateObj.year, dateObj.month, 1), 'MMM yyyy'): 'Present';
+    return dateObj 
+      ? format(Utilities.getDateInstanceFromMonthAndYear(dateObj.month, dateObj.year), 'MMM yyyy') 
+      : 'Present';
+  }
+
+  /**
+   * Retrieves a Date Instance based on a given month and year.
+   * @param {*} month 
+   * @param {*} year 
+   * @returns Date
+   */
+  static getDateInstanceFromMonthAndYear(month, year) {
+    return new Date(year, month, 1);
   }
 }
 

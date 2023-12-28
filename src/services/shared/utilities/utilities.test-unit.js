@@ -83,4 +83,9 @@ describe('Date Formatting', () => {
     const date = Utilities.prettifyDateRange({month: 3, year: 2019}, {month: 6, year: 2024});
     expect(date).toEqual('Apr 2019 - Jul 2024');
   });
+
+  test('can retrieve a date instance based on a given month and year', () => {
+    const date = Utilities.getDateInstanceFromMonthAndYear(0, 2020);
+    expect(date.getTime()).toEqual(1577851200000);
+  });
 });

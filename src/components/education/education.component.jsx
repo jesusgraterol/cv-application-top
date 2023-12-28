@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Certificate from './certificate.component';
 
 /**
  * Education Component
  * ...
  */
-function Education() {
+function Education({ record, dispatch }) {
   const [ sectionHovered, setSectionHovered ] = useState(false);
   return (
     <section  id="education" 
@@ -27,6 +28,10 @@ function Education() {
 
     </section>
   );
+}
+Education.propTypes = {
+  record: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 
