@@ -19,9 +19,9 @@ function App() {
 
         <About record={record} dispatch={dispatch} />
 
-        <Experience />
+        <Experience record={record} dispatch={dispatch} />
 
-        <Education />
+        <Education record={record} dispatch={dispatch} />
         
       </main>
 

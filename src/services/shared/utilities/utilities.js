@@ -89,6 +89,30 @@ class Utilities {
   static getDateInstanceFromMonthAndYear(month, year) {
     return new Date(year, month, 1);
   }
+
+
+
+
+  /* **************
+   * MISC HELPERS *
+   ************** */
+
+  /**
+   * Given a list of items (certificates|positions), it will sort them based on the start date desc.
+   * @param {*} items 
+   * @returns Array<ICertificate|IPosition>
+   */
+  static sortListItemsByTimestamp(items) {
+    const sortedItems = items.slice();
+    sortedItems.sort((first, second) => {
+      const timestamps = [
+        Utilities.getDateInstanceFromMonthAndYear(first.start.month, first.start.year).getTime(),
+        Utilities.getDateInstanceFromMonthAndYear(second.start.month, second.start.year).getTime()
+      ]
+      return timestamps[1] - timestamps[0];
+    });
+    return sortedItems;
+  }
 }
 
 

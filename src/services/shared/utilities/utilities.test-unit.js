@@ -89,3 +89,34 @@ describe('Date Formatting', () => {
     expect(date.getTime()).toEqual(1577851200000);
   });
 });
+
+
+
+
+
+describe('Misc Helpers', () => {
+  beforeAll(() => { });
+
+  afterAll(() => { });
+
+  beforeEach(() => { });
+
+  afterEach(() => { });
+
+  test('can sort an array of items based on their start date', () => {
+    const originalItems = [
+      { start: { month: 2, year: 2020} },
+      { start: { month: 1, year: 2020} },
+      { start: { month: 7, year: 2021} },
+      { start: { month: 3, year: 2019} },
+    ];
+    const sortedItems = Utilities.sortListItemsByTimestamp(originalItems);
+    expect(sortedItems).toEqual([
+      { start: { month: 7, year: 2021} },
+      { start: { month: 2, year: 2020} },
+      { start: { month: 1, year: 2020} },
+      { start: { month: 3, year: 2019} },
+    ]);
+  });
+
+});

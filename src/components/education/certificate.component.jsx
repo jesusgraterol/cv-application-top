@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+import Utilities from '../../services/shared/utilities/utilities';
 
 /**
  * Certificate Component
  * ...
  */
-function Certificate() {
+function Certificate({ certificate, editItem }) {
   const [ sectionHovered, setSectionHovered ] = useState(false);
   return (
     <article  onMouseEnter={() => setSectionHovered(true)} 
@@ -12,18 +14,25 @@ function Certificate() {
                 
       {
         sectionHovered &&
-        <button className="icon-btn" aria-label="Update Education Item">
+        <button className="icon-btn" 
+                aria-label="Update Education Item" 
+                onClick={() => editItem(certificate.id)}>
           <span className="md-icon" aria-hidden="true">edit</span>
         </button>
       }
 
-      <p className="title truncate">Computer Science and Engineering</p>
-      <p className="issuer truncate">Massachusetts Institute of Technology</p>
-      <p className="date-range">Jan 2020 - Feb 2023</p>
+      <p className="title truncate">{certificate.title}</p>
+      <p className="issuer truncate">{certificate.issuer}</p>
+      <p className="date-range">{Utilities.prettifyDateRange(certificate.start, certificate.end)}</p>
 
     </article>
   );
 }
+Certificate.propTypes = {
+  certificate: PropTypes.object.isRequired,
+  editItem: PropTypes.func.isRequired,
+}
+
 
 
 
