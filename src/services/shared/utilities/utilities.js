@@ -10,6 +10,14 @@ import { format } from 'date-fns';
  * Provides commonly used functionality in order to main consistency across modules.
  */
 class Utilities {
+  // the list of months
+  static monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+  'September', 'October', 'November', 'December' ];
+
+
+
+
+
   /* *****************
    * UUID MANAGEMENT *
    ***************** */
@@ -34,9 +42,9 @@ class Utilities {
 
 
 
-  /* **************
-   * MISC HELPERS *
-   ************** */
+  /* *****************
+   * DATE FORMATTING *
+   ***************** */
 
   /**
    * Formats a timestamp or the current time if none is provided.
@@ -48,6 +56,26 @@ class Utilities {
       typeof timestamp === 'number' ? new Date(timestamp) : new Date(),
       'dd/MM/yyyy, hh:mm:ss a',
     );
+  }
+
+  /**
+   * Given a start and end date range, it prettifies it and returns it. If no end is provided it will
+   * use 'Present' instead.
+   * @param {*} start 
+   * @param {?} end 
+   * @returns string
+   */
+  static prettifyDateRange(start, end = undefined) {
+    return `${Utilities.#prettifyDateRangeChunk(start)} - ${Utilities.#prettifyDateRangeChunk(end)}`;
+  }
+
+  /**
+   * Generates a pretty date string for a given date range object. If not set, it returns 'Present'.
+   * @param {*} dateObj 
+   * @returns string
+   */
+  static #prettifyDateRangeChunk(dateObj) {
+    return dateObj ? format(new Date(dateObj.year, dateObj.month, 1), 'MMM yyyy'): 'Present';
   }
 }
 

@@ -73,4 +73,14 @@ describe('Date Formatting', () => {
     const date = Utilities.formatDate(1672622975000);
     expect(date).toEqual('01/01/2023, 09:29:35 PM');
   });
+
+  test('can format a date range when only the start is provided', () => {
+    const date = Utilities.prettifyDateRange({month: 1, year: 2020});
+    expect(date).toEqual('Feb 2020 - Present');
+  });
+
+  test('can format a date range when the start and end are provided', () => {
+    const date = Utilities.prettifyDateRange({month: 3, year: 2019}, {month: 6, year: 2024});
+    expect(date).toEqual('Apr 2019 - Jul 2024');
+  });
 });
