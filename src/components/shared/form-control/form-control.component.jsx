@@ -11,9 +11,10 @@ function FormControl({
   value,
   onChange,
   error = undefined, 
+  placeholder = '',
   rows = 3,
   options = [],
-  accept = 'image/*' 
+  accept = 'image/*',
 }) {
 
   return (
@@ -24,6 +25,7 @@ function FormControl({
             <input  type={type}
                     name={name}
                     id={name}
+                    placeholder={placeholder}
                     value={value} 
                     onChange={(e) => onChange(e)}  />
           </label>
@@ -33,6 +35,7 @@ function FormControl({
               <textarea id={name}
                         name={name}
                         rows={rows}
+                        placeholder={placeholder}
                         onChange={(e) => onChange(e)} 
                         value={value}></textarea>
             </label>
@@ -76,6 +79,7 @@ FormControl.propTypes = {
   value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.object ]),
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,
+  placeholder: PropTypes.string,
   rows: PropTypes.string, // textarea
   options: PropTypes.array, // select
   accept: PropTypes.string, // file inputs

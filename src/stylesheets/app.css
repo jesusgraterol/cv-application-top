@@ -133,6 +133,10 @@ body {
   font-family: "Montserrat", "Roboto", sans-serif;
   background-color: var(--app-background-color);
   color: var(--text-color);
+  overflow-y: scroll;
+}
+body:has(dialog) {
+  overflow-y: hidden;
 }
 
 

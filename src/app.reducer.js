@@ -12,10 +12,6 @@ function appReducer(record, action) {
       return { ...record, general: action.newGeneral };
     }
 
-
-
-
-
     /**
      * About Actions
      */
@@ -23,18 +19,12 @@ function appReducer(record, action) {
       return { ...record, bio: action.newBio };
     }
 
-
-
-
-    
     /**
      * Experience Actions
      */
-    // @TODO
-
-
-
-
+    case 'positions_changed': {
+      return { ...record, experience: action.newPositions };
+    }
 
     /**
      * Education Actions
@@ -42,10 +32,6 @@ function appReducer(record, action) {
     case 'certificates_changed': {
       return { ...record, education: action.newCertificates };
     }
-
-
-
-
 
     /**
      * Unknown Action
