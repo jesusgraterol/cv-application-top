@@ -187,7 +187,7 @@ function PositionForm({ modal, setModal, record, dispatch, itemID }) {
                             name='responsibilities' 
                             value={controls.responsibilities.value} 
                             onChange={handleOnChange} 
-                            error={controls.responsibilities.valid ? undefined: 'Enter a valid list of responsibilities'} />
+                            error={controls.responsibilities.pristine || controls.responsibilities.valid ? undefined: 'Enter a valid list of responsibilities'} />
           </div>
 
           { /* Start */ }

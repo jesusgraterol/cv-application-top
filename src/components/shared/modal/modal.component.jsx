@@ -12,7 +12,11 @@ function Modal({ openModal, closeModal, children }) {
     if (openModal) {
       ref.current.showModal();
     } else {
-      ref.current.close();
+      /**
+       * ref.current.close() is never invoked as when openModal is false, the dialog element is 
+       * fully removed from the DOM in the parent component.
+       */
+      // ref.current.close();
     }
   }, [openModal]);
 
