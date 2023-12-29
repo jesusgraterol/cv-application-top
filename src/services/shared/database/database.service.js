@@ -48,7 +48,7 @@ class Database {
           employeer: 'Google',
           start: { month: 7, year: 2022 },
           end: undefined,
-          responsibilities: 'Interactivity Implementation, Web and Mobile UI/UX Design, Team Collaboration and Organization'
+          responsibilities: 'Interactivity Implementation,Web and Mobile UI/UX Design,Team Collaboration and Organization'
         },
       ],
       education: [

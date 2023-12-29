@@ -11,10 +11,6 @@ import FormControl from '../shared/form-control/form-control.component';
  */
 const currentYear = new Date().getFullYear();
 
-
-
-
-
 /**
  * Certificate Form Component
  * ...
@@ -38,36 +34,36 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
       validate: (val) => /^[a-zA-Z0-9 ,/\.\-_]{4,200}$/.test(val) 
     },
     startMonth: { 
-      value: cert ? cert.start.month : '', 
+      value: cert ? String(cert.start.month) : '', 
       valid: cert !== undefined, 
       pristine: true,
       validate: (val) => val.length > 0
     },
     startYear: { 
-      value: cert ? cert.start.year : '', 
+      value: cert ? String(cert.start.year) : '', 
       valid: cert !== undefined, 
       pristine: true,
       validate: (val) => {
-        val = Number(val)
-        return Number.isInteger(val) && val >= 1980 && val <= currentYear
+        const newVal = Number(val)
+        return Number.isInteger(newVal) && newVal >= 1980 && newVal <= currentYear
       }
     },
     endMonth: { 
-      value: cert && cert.end ? cert.end.month : '', 
+      value: cert && cert.end ? String(cert.end.month) : '', 
       valid: true, 
       pristine: true,
       validate: () => true
     },
     endYear: { 
-      value: cert && cert.end ? cert.end.year : '', 
+      value: cert && cert.end ? String(cert.end.year) : '', 
       valid: true, 
       pristine: true,
       validate: (val) => {
         if (!val.length) {
           return true;
         }
-        val = Number(val);
-        return Number.isInteger(val) && val >= 1980 && val <= currentYear;
+        const newVal = Number(val);
+        return Number.isInteger(newVal) && newVal >= 1980 && newVal <= currentYear;
       }
     },
   });
@@ -111,7 +107,8 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
         issuer: controls.issuer.value,
         start: { month: Number(controls.startMonth.value), year: Number(controls.startYear.value) },
         end: controls.endMonth.value.length && controls.endYear.value.length 
-          ? { month: controls.endMonth.value, year: controls.endYear.value } : undefined,
+          ? { month: Number(controls.endMonth.value), year: Number(controls.endYear.value) } 
+          : undefined,
       }]);
     } else {
       nextCertificates = record.education.map((item) => {
@@ -122,7 +119,8 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
             issuer: controls.issuer.value,
             start: { month: Number(controls.startMonth.value), year: Number(controls.startYear.value) },
             end: controls.endMonth.value.length && controls.endYear.value.length 
-              ? { month: controls.endMonth.value, year: controls.endYear.value } : undefined,
+              ? { month: Number(controls.endMonth.value), year: Number(controls.endYear.value) } 
+              : undefined,
           }
         }
         return item;
