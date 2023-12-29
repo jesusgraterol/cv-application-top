@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Database from '../../services/shared/database/database.service';
 import Modal from '../shared/modal/modal.component';
+import FormControl from '../shared/form-control/form-control.component';
 
 /**
  * About Form Component
@@ -44,18 +45,13 @@ function AboutForm({ modal, setModal, record, dispatch }) {
         <form noValidate onSubmit={handleFormSubmission}>
 
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="bio">Bio*
-                      <textarea id="bio" 
-                                name="bio" 
-                                onChange={(e) => handleOnChange(e)} 
-                                rows="7"
-                                value={bio}></textarea>
-                  </label>
-                  <p className="error" style={{ visibility: formValid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid bio
-                  </p>
-              </div>
+              <FormControl  type='textarea'
+                            title='Bio*' 
+                            name='bio' 
+                            value={bio} 
+                            rows="7"
+                            onChange={handleOnChange} 
+                            error={formValid ? undefined: 'Enter a valid bio'} />
           </div>
           
           <button className="btn primary full-width" type="submit" disabled={!formValid}>
