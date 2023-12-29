@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Utilities from '../../services/shared/utilities/utilities';
 import Database from '../../services/shared/database/database.service';
 import Modal from '../shared/modal/modal.component';
+import FormControl from '../shared/form-control/form-control.component';
 
 /**
  * Component Globals
@@ -42,7 +43,10 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
     startYear: { 
       value: cert ? cert.start.year : '', 
       valid: cert !== undefined, 
-      validate: (val) => val >= 1980 && val <= currentYear
+      validate: (val) => {
+        val = Number(val)
+        return val >= 1980 && val <= currentYear
+      }
     },
     endMonth: { 
       value: cert ? cert.end.month : '', 
@@ -52,11 +56,17 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
     endYear: { 
       value: cert ? cert.end.year : '', 
       valid: cert !== undefined, 
-      validate: (val) => typeof val !== 'number' ? true : val >= 1980 && val <= currentYear
+      validate: (val) => {
+        if (!val.length) {
+          return true;
+        }
+        val = Number(val);
+        return val >= 1980 && val <= currentYear;
+      }
     },
   });
   const [ formValid, setFormValid ] = useState(cert !== undefined);
-  console.log(controls);
+
   // input changes event handler
   const handleOnChange = (e) => {
     const nextControls = {
@@ -103,72 +113,42 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
 
         { /* Title */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="title">Title*
-                      <input  type="text" 
-                              name="title" 
-                              id="title" 
-                              value={controls.title.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.title.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid title
-                  </p>
-              </div>
+              <FormControl  title='Title*' 
+                            name='title' 
+                            value={controls.title.value} 
+                            onChange={handleOnChange} 
+                            error={controls.title.valid ? undefined: 'Enter a valid title'} />
           </div>
 
           { /* Issuer */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="issuer">Issuer*
-                      <input  type="text" 
-                              name="issuer" 
-                              id="issuer" 
-                              value={controls.issuer.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.issuer.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid issuer
-                  </p>
-              </div>
+              <FormControl  title='Issuer*' 
+                            name='issuer' 
+                            value={controls.issuer.value} 
+                            onChange={handleOnChange} 
+                            error={controls.issuer.valid ? undefined: 'Enter a valid issuer'} />
           </div>
 
           { /* Start */ }
           <fieldset>
             <p><strong>Start Date</strong></p>
             <div className="form-row">
-              <div className="form-control">
-                <label htmlFor="startMonth">Month*
-                    <select name="startMonth" 
-                            id="startMonth" 
-                            value={controls.startMonth.value} 
-                            onChange={(e) => handleOnChange(e)}>
-                        <option key="" value=""></option>
-                        {Utilities.monthNames.map((name, index) => {
-                          return <option key={index} value={index}>{name}</option>;
-                        })}
-                    </select>
-                </label>
-                <p  className="error" 
-                    style={{ visibility: controls.startMonth.valid ? 'hidden': 'visible' }}>
-                    <span className="md-icon">error</span> Enter a valid month
-                </p>
-              </div>
-              <div className="form-control">
-                  <label htmlFor="startYear">Year*
-                      <input  type="number" 
-                              name="startYear" 
-                              id="startYear" 
-                              value={controls.startYear.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.startYear.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid year
-                  </p>
-              </div>
+              <FormControl  type='select'
+                                title='Month*' 
+                                name='startMonth' 
+                                value={controls.startMonth.value} 
+                                options={Utilities.monthNames.map((name, i) => {
+                                  return { name: name, value: i };
+                                })}
+                                onChange={handleOnChange} 
+                                error={controls.startMonth.valid ? undefined: 'Enter a valid start month'} />
+
+              <FormControl  type='number'
+                            title='Year*' 
+                            name='startYear' 
+                            value={controls.startYear.value} 
+                            onChange={handleOnChange} 
+                            error={controls.startYear.valid ? undefined: 'Enter a valid start year'} />
             </div>
           </fieldset>
 
@@ -176,36 +156,22 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
           <fieldset>
             <p><strong>End Date</strong></p>
             <div className="form-row">
-              <div className="form-control">
-                <label htmlFor="endMonth">Month
-                    <select name="endMonth" 
-                            id="endMonth" 
-                            value={controls.endMonth.value} 
-                            onChange={(e) => handleOnChange(e)}>
-                        <option key="" value=""></option>
-                        {Utilities.monthNames.map((name, index) => {
-                          return <option key={index} value={index}>{name}</option>;
-                        })}
-                    </select>
-                </label>
-                <p  className="error" 
-                    style={{ visibility: controls.endMonth.valid ? 'hidden': 'visible' }}>
-                    <span className="md-icon">error</span> Enter a valid month
-                </p>
-              </div>
-              <div className="form-control">
-                  <label htmlFor="endYear">Year
-                      <input  type="number" 
-                              name="endYear" 
-                              id="endYear" 
-                              value={controls.endYear.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.endYear.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid year
-                  </p>
-              </div>
+              <FormControl  type='select'
+                                  title='Month*' 
+                                  name='endMonth' 
+                                  value={controls.endMonth.value} 
+                                  options={Utilities.monthNames.map((name, i) => {
+                                    return { name: name, value: i };
+                                  })}
+                                  onChange={handleOnChange} 
+                                  error={controls.endMonth.valid ? undefined: 'Enter a valid end month'} />
+
+              <FormControl  type='number'
+                            title='Year*' 
+                            name='endYear' 
+                            value={controls.endYear.value} 
+                            onChange={handleOnChange} 
+                            error={controls.endYear.valid ? undefined: 'Enter a valid end year'} />
             </div>
           </fieldset>
           
