@@ -26,42 +26,48 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
   // init the form controls
   const [ controls, setControls ] = useState({
     title: { 
-      value: cert?.title, 
+      value: cert ? cert.title : '', 
       valid: cert !== undefined, 
-      validate: (val) => /^[a-zA-Z0-9 ,/\.\-_]{2,200}$/.test(val) 
+      pristine: true,
+      validate: (val) => /^[a-zA-Z0-9 ,/\.\-_]{6,200}$/.test(val) 
     },
     issuer: { 
       value: cert ? cert.issuer : '', 
       valid: cert !== undefined, 
-      validate: (val) => /^[a-zA-Z0-9 ,/\.\-_]{2,200}$/.test(val) 
+      pristine: true,
+      validate: (val) => /^[a-zA-Z0-9 ,/\.\-_]{4,200}$/.test(val) 
     },
     startMonth: { 
       value: cert ? cert.start.month : '', 
       valid: cert !== undefined, 
+      pristine: true,
       validate: (val) => val.length > 0
     },
     startYear: { 
       value: cert ? cert.start.year : '', 
       valid: cert !== undefined, 
+      pristine: true,
       validate: (val) => {
         val = Number(val)
-        return val >= 1980 && val <= currentYear
+        return Number.isInteger(val) && val >= 1980 && val <= currentYear
       }
     },
     endMonth: { 
-      value: cert ? cert.end.month : '', 
-      valid: cert !== undefined, 
+      value: cert && cert.end ? cert.end.month : '', 
+      valid: true, 
+      pristine: true,
       validate: () => true
     },
     endYear: { 
-      value: cert ? cert.end.year : '', 
-      valid: cert !== undefined, 
+      value: cert && cert.end ? cert.end.year : '', 
+      valid: true, 
+      pristine: true,
       validate: (val) => {
         if (!val.length) {
           return true;
         }
         val = Number(val);
-        return val >= 1980 && val <= currentYear;
+        return Number.isInteger(val) && val >= 1980 && val <= currentYear;
       }
     },
   });
@@ -74,27 +80,65 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
       [e.target.name]: {
         ...controls[e.target.name],
         value: e.target.value,
-        valid: controls[e.target.name].validate(e.target.value)
+        valid: controls[e.target.name].validate(e.target.value),
+        pristine: false,
       }
     };
     setControls(nextControls);
     setFormValid(Object.values(nextControls).every((control) => control.valid));
   }
 
+  // changes broadcaster
+  const broadcastChanges = (nextCertificates) => {
+    Database.set({ ...record, education: nextCertificates });
+    dispatch({
+      type: 'certificates_changed',
+      newCertificates: nextCertificates
+    });
+    setModal(false);
+  }
+
   // form submission event handler
   const handleFormSubmission = (e) => {
-/*     e.preventDefault();
-    Database.set({ ...record, bio: bio });
-    dispatch({
-      type: 'update_bio',
-      newBio: bio
-    });
-    setModal(false); */
+    e.preventDefault();
+
+    // handle the action based on the certificate being created or updated
+    let nextCertificates;
+    if (cert === undefined) {
+      nextCertificates = record.education.concat([{
+        id: Utilities.generateUUID(),
+        title: controls.title.value,
+        issuer: controls.issuer.value,
+        start: { month: Number(controls.startMonth.value), year: Number(controls.startYear.value) },
+        end: controls.endMonth.value.length && controls.endYear.value.length 
+          ? { month: controls.endMonth.value, year: controls.endYear.value } : undefined,
+      }]);
+    } else {
+      nextCertificates = record.education.map((item) => {
+        if (item.id === itemID) {
+          return {
+            ...item,
+            title: controls.title.value,
+            issuer: controls.issuer.value,
+            start: { month: Number(controls.startMonth.value), year: Number(controls.startYear.value) },
+            end: controls.endMonth.value.length && controls.endYear.value.length 
+              ? { month: controls.endMonth.value, year: controls.endYear.value } : undefined,
+          }
+        }
+        return item;
+      });
+    }
+
+    // sort the items by date descending
+    nextCertificates = Utilities.sortListItemsByTimestamp(nextCertificates);
+
+    // broadcast the changes
+    broadcastChanges(nextCertificates);
   }
 
   // delete item event handler
   const handleDeleteButtonClick = () => {
-    /*  */
+    broadcastChanges(record.education.filter((item) => item.id !== itemID));
   }
 
   return (
@@ -117,7 +161,7 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
                             name='title' 
                             value={controls.title.value} 
                             onChange={handleOnChange} 
-                            error={controls.title.valid ? undefined: 'Enter a valid title'} />
+                            error={controls.title.pristine || controls.title.valid ? undefined: 'Enter a valid title'} />
           </div>
 
           { /* Issuer */ }
@@ -126,7 +170,7 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
                             name='issuer' 
                             value={controls.issuer.value} 
                             onChange={handleOnChange} 
-                            error={controls.issuer.valid ? undefined: 'Enter a valid issuer'} />
+                            error={controls.issuer.pristine || controls.issuer.valid ? undefined: 'Enter a valid issuer'} />
           </div>
 
           { /* Start */ }
@@ -141,14 +185,14 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
                                   return { name: name, value: i };
                                 })}
                                 onChange={handleOnChange} 
-                                error={controls.startMonth.valid ? undefined: 'Enter a valid start month'} />
+                                error={controls.startMonth.pristine || controls.startMonth.valid ? undefined: 'Enter a valid start month'} />
 
               <FormControl  type='number'
                             title='Year*' 
                             name='startYear' 
                             value={controls.startYear.value} 
                             onChange={handleOnChange} 
-                            error={controls.startYear.valid ? undefined: 'Enter a valid start year'} />
+                            error={controls.startYear.pristine || controls.startYear.valid ? undefined: 'Enter a valid start year'} />
             </div>
           </fieldset>
 
@@ -164,14 +208,14 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
                                     return { name: name, value: i };
                                   })}
                                   onChange={handleOnChange} 
-                                  error={controls.endMonth.valid ? undefined: 'Enter a valid end month'} />
+                                  error={controls.endMonth.pristine || controls.endMonth.valid ? undefined: 'Enter a valid end month'} />
 
               <FormControl  type='number'
                             title='Year*' 
                             name='endYear' 
                             value={controls.endYear.value} 
                             onChange={handleOnChange} 
-                            error={controls.endYear.valid ? undefined: 'Enter a valid end year'} />
+                            error={controls.endYear.pristine || controls.endYear.valid ? undefined: 'Enter a valid end year'} />
             </div>
           </fieldset>
           
