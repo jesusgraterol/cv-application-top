@@ -39,14 +39,8 @@ function appReducer(record, action) {
     /**
      * Education Actions
      */
-    case 'add_certificate': {
-      return { ...record, };
-    }
-    case 'update_certificate': {
-      return { ...record, };
-    }
-    case 'delete_certificate': {
-      return { ...record, };
+    case 'certificates_changed': {
+      return { ...record, education: action.newCertificates };
     }
 
 

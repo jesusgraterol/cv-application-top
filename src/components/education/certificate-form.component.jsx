@@ -26,36 +26,36 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
   const [ controls, setControls ] = useState({
     title: { 
       value: cert?.title, 
-      valid: cert !== null, 
+      valid: cert !== undefined, 
       validate: (val) => /^[a-zA-Z0-9 ,/\.\-_]{2,200}$/.test(val) 
     },
     issuer: { 
       value: cert ? cert.issuer : '', 
-      valid: cert !== null, 
+      valid: cert !== undefined, 
       validate: (val) => /^[a-zA-Z0-9 ,/\.\-_]{2,200}$/.test(val) 
     },
     startMonth: { 
       value: cert ? cert.start.month : '', 
-      valid: cert !== null, 
+      valid: cert !== undefined, 
       validate: (val) => val.length > 0
     },
     startYear: { 
       value: cert ? cert.start.year : '', 
-      valid: cert !== null, 
+      valid: cert !== undefined, 
       validate: (val) => val >= 1980 && val <= currentYear
     },
     endMonth: { 
       value: cert ? cert.end.month : '', 
-      valid: cert !== null, 
+      valid: cert !== undefined, 
       validate: () => true
     },
     endYear: { 
       value: cert ? cert.end.year : '', 
-      valid: cert !== null, 
+      valid: cert !== undefined, 
       validate: (val) => typeof val !== 'number' ? true : val >= 1980 && val <= currentYear
     },
   });
-  const [ formValid, setFormValid ] = useState(true);
+  const [ formValid, setFormValid ] = useState(cert !== undefined);
   console.log(controls);
   // input changes event handler
   const handleOnChange = (e) => {
@@ -177,7 +177,7 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
             <p><strong>End Date</strong></p>
             <div className="form-row">
               <div className="form-control">
-                <label htmlFor="endMonth">Month*
+                <label htmlFor="endMonth">Month
                     <select name="endMonth" 
                             id="endMonth" 
                             value={controls.endMonth.value} 
@@ -194,7 +194,7 @@ function CertificateForm({ modal, setModal, record, dispatch, itemID }) {
                 </p>
               </div>
               <div className="form-control">
-                  <label htmlFor="endYear">Year*
+                  <label htmlFor="endYear">Year
                       <input  type="number" 
                               name="endYear" 
                               id="endYear" 

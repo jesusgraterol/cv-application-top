@@ -3,6 +3,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Database from '../../services/shared/database/database.service';
 import Modal from '../shared/modal/modal.component';
+import FormControl from '../shared/form-control/form-control.component';
 
 /**
  * Header Form Component
@@ -110,98 +111,60 @@ function HeaderForm({ modal, setModal, record, dispatch }) {
 
           { /* Name */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="name">Name*
-                      <input  type="text" 
-                              name="name" 
-                              id="name" 
-                              value={controls.name.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.name.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid name
-                  </p>
-              </div>
+            <FormControl  title='Name*' 
+                          name='name' 
+                          value={controls.name.value} 
+                          onChange={handleOnChange} 
+                          error={controls.name.valid ? undefined: 'Enter a valid name'} />
           </div>
 
           { /* Headline */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="headline">Headline*
-                      <input  type="text" 
-                              name="headline" 
-                              id="headline" 
-                              value={controls.headline.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.headline.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid headline
-                  </p>
-              </div>
+              <FormControl  title='Headline*' 
+                            name='headline' 
+                            value={controls.headline.value} 
+                            onChange={handleOnChange} 
+                            error={controls.headline.valid ? undefined: 'Enter a valid headline'} />
           </div>
 
           { /* Email */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="email">Email*
-                      <input  type="email" 
-                              name="email" 
-                              id="email" 
-                              value={controls.email.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.email.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid email
-                  </p>
-              </div>
+              <FormControl  type='email'
+                            title='Email*' 
+                            name='email' 
+                            value={controls.email.value} 
+                            onChange={handleOnChange} 
+                            error={controls.email.valid ? undefined: 'Enter a valid email'} />
           </div>
 
           { /* Phone Number */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="phoneNumber">Phone Number*
-                      <input  type="text" 
-                              name="phoneNumber" 
-                              id="phoneNumber" 
-                              value={controls.phoneNumber.value} 
-                              onChange={(e) => handleOnChange(e)}  />
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.phoneNumber.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid phone number
-                  </p>
-              </div>
+              <FormControl  title='Phone Number*' 
+                            name='phoneNumber' 
+                            value={controls.phoneNumber.value} 
+                            onChange={handleOnChange} 
+                            error={controls.phoneNumber.valid ? undefined: 'Enter a valid phone number'} />
           </div>
 
           { /* Location */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="location">Location*
-                      <textarea id="location" 
-                                name="location" 
-                                onChange={(e) => handleOnChange(e)} 
-                                value={controls.location.value}></textarea>
-                  </label>
-                  <p  className="error" 
-                      style={{ visibility: controls.location.valid ? 'hidden': 'visible' }}>
-                      <span className="md-icon">error</span> Enter a valid location
-                  </p>
-              </div>
+              <FormControl  type='textarea'
+                            title='Location*' 
+                            name='location' 
+                            value={controls.location.value} 
+                            onChange={handleOnChange} 
+                            error={controls.location.valid ? undefined: 'Enter a valid location'} />
           </div>
           
           { /* Avatar */ }
           <div className="form-row">
-              <div className="form-control">
-                  <label htmlFor="avatar">Avatar</label>
-                  <input  type="file" 
-                          id="avatar" 
-                          name="avatar" 
-                          accept="image/*"
-                          onChange={(e) => handleOnChangeFile(e)}  />
-              </div>
+              <FormControl  type='file'
+                            title='Avatar' 
+                            name='avatar' 
+                            accept="image/*"
+                            value={controls.avatar.value} 
+                            onChange={handleOnChangeFile} 
+                            error={controls.avatar.valid ? undefined: 'Select a valid avatar'} />
           </div>
 
           <button className="btn primary full-width" type="submit" disabled={!formValid}>
